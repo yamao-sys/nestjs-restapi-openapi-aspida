@@ -22,7 +22,12 @@ export class AuthService {
     const { email, password } = signUpDto;
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    return this.userService.create({ email, password: hashedPassword });
+    // return this.userService.create({ email, password: hashedPassword });
+    const user = await this.userService.create({
+      email,
+      password: hashedPassword,
+    });
+    return { id: user.id, email: user.email };
   }
 
   async signIn(signinDto: SignInDto) {

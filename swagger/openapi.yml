@@ -1,0 +1,80 @@
+openapi: 3.0.0
+info:
+  title: Create Todo
+  version: 1.0.0
+
+paths:
+  /auth/sign_up:
+    post:
+      operationId: signUp
+      description: Create user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpDto'
+      responses:
+        '200':
+          description: Created User.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResult'
+  /auth/sign_in:
+    post:
+      operationId: signIn
+      description: Login.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInDto'
+      responses:
+        '200':
+          description: Succeed in Login.
+          content:
+            application/json:
+              schema:
+                type: string
+
+components:
+  schemas:
+    SignUpDto:
+      description: Create user params.
+      type: object
+      properties:
+        email:
+          type: string
+          example: test@example.com
+        password:
+          type: string
+      required:
+        - email
+        - password
+    SignUpResult:
+      description: Create user result.
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        email:
+          type: string
+          example: test@example.com
+      required:
+        - id
+        - email
+    SignInDto:
+      description: Sign in params.
+      type: object
+      properties:
+        email:
+          type: string
+          example: test@example.com
+        password:
+          type: string
+      required:
+        - email
+        - password

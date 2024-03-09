@@ -1,10 +1,31 @@
 import { IsNotEmpty, Length } from 'class-validator';
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { User } from '../users/entities/user.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 
 @Entity('todos')
 export class Todo extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   id!: string;
+
+  @Column({ type: 'bigint', name: 'user_id' })
+  userId!: string;
+
+  @ManyToOne(() => User, (user) => user.todos, {
+    createForeignKeyConstraints: true,
+    persistence: false,
+  })
+  @JoinColumn({
+    name: 'user_id',
+    referencedColumnName: 'id',
+  })
+  readonly user?: User;
 
   @IsNotEmpty({ message: 'タイトルは必須です。' })
   @Length(1, 255, {

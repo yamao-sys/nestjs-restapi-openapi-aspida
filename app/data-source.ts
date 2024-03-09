@@ -9,8 +9,7 @@ export const datasourceOptions: DataSourceOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   entities: [join(__dirname, '/src/**/*.entity.{ts,js}')],
-  migrations: ['./src/migrations/*.ts'],
-  migrationsRun: JSON.parse(process.env.MIGRATIONS_RUN),
+  migrations: [join(__dirname, '/migrations/*.{ts,js}')],
   synchronize: JSON.parse(process.env.SYNCHRONIZE),
   logging: false,
 };

@@ -9,24 +9,32 @@ import {
   Param,
   Post,
   Put,
+  Request,
+  UseGuards,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
 import { CreateTodoDto, UpdateTodoDto } from './todo.dto';
 import { Todo } from './todo.entity';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { JwtPayload } from 'src/interfaces/jwt-payload.interface';
 
+@UseGuards(AuthGuard)
 @Controller('todos')
 export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
   @Get()
-  async index(): Promise<Todo[]> {
-    return await this.todosService.findAll();
+  async index(@Request() req: { user: JwtPayload }): Promise<Todo[]> {
+    return await this.todosService.findAll(req.user.userId);
   }
 
   @Post()
-  async create(@Body() dto: CreateTodoDto): Promise<Todo> {
+  async create(
+    @Request() req: { user: JwtPayload },
+    @Body() dto: CreateTodoDto,
+  ): Promise<Todo> {
     try {
-      return this.todosService.create(dto);
+      return this.todosService.create(dto, req.user.userId);
     } catch (error) {
       throw new HttpException(
         'Internal Server Error',
@@ -36,8 +44,11 @@ export class TodosController {
   }
 
   @Get(':id')
-  async show(@Param('id') id: string): Promise<Todo> {
-    const todo = await this.todosService.read(id);
+  async show(
+    @Request() req: { user: JwtPayload },
+    @Param('id') id: string,
+  ): Promise<Todo> {
+    const todo = await this.todosService.read(id, req.user.userId);
     if (!todo) {
       throw new NotFoundException({ message: '該当するTODOがありません。' });
     }
@@ -48,8 +59,9 @@ export class TodosController {
   async update(
     @Param('id') id: string,
     @Body() dto: UpdateTodoDto,
+    @Request() req: { user: JwtPayload },
   ): Promise<Todo> {
-    const todo = await this.todosService.read(id);
+    const todo = await this.todosService.read(id, req.user.userId);
     if (!todo) {
       throw new NotFoundException({ message: '該当するTODOがありません。' });
     }
@@ -64,8 +76,11 @@ export class TodosController {
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<Todo> {
-    const todo = await this.todosService.read(id);
+  async delete(
+    @Request() req: { user: JwtPayload },
+    @Param('id') id: string,
+  ): Promise<Todo> {
+    const todo = await this.todosService.read(id, req.user.userId);
     if (!todo) {
       throw new NotFoundException({ message: '該当するTODOがありません。' });
     }

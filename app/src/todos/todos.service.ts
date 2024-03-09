@@ -11,16 +11,23 @@ export class TodosService {
     private readonly todoRepository: Repository<Todo>,
   ) {}
 
-  async findAll(): Promise<Todo[]> {
-    return await this.todoRepository.find();
+  async findAll(userId: string): Promise<Todo[]> {
+    return await this.todoRepository.find({
+      where: { userId },
+    });
   }
 
-  async create(dto: CreateTodoDto): Promise<Todo> {
-    return await this.todoRepository.save(dto);
+  async create(dto: CreateTodoDto, userId: string): Promise<Todo> {
+    const todo = new Todo();
+    todo.title = dto.title;
+    todo.content = dto.content;
+    todo.userId = userId;
+
+    return await this.todoRepository.save(todo);
   }
 
-  async read(id: string): Promise<Todo> {
-    return await this.todoRepository.findOneBy({ id: id });
+  async read(id: string, userId: string): Promise<Todo> {
+    return await this.todoRepository.findOneBy({ id, userId });
   }
 
   async update(todo: Todo, dto: UpdateTodoDto): Promise<Todo> {

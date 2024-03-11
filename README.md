@@ -64,5 +64,11 @@ npx swagger-merger -i ../swagger/todos/index.yml -o ../swagger/todos/swagger.yml
 一つにまとめたymlをもとに型ファイルを作成
 rm -rf api/todos && npx openapi2aspida -i ../swagger/todos/swagger.yml -o api/todos
 
+【参考】
+・https://zenn.dev/ryota0222/articles/b811120b7d2701
+・https://zenn.dev/mizu4ma/articles/d3b937b321f3b4
+
 それぞれのエンドポイントごとにバリデータを設定
-参考: https://github.com/cdimascio/express-openapi-validator/blob/master/examples/9-nestjs/src/app.module.ts
+【参考】
+・https://github.com/cdimascio/express-openapi-validator/blob/master/examples/9-nestjs/src/app.module.ts
+・https://qiita.com/mana-vv/items/6d6946085e360883e5ad

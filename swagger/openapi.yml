@@ -1,0 +1,153 @@
+openapi: 3.0.0
+info:
+  title: Create Todo
+  version: 1.0.0
+
+paths:
+  /auth/sign_up:
+    post:
+      operationId: signUp
+      description: Create user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpDto'
+      responses:
+        '200':
+          description: Created User.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResult'
+  /auth/sign_in:
+    post:
+      operationId: signIn
+      description: Login.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInDto'
+      responses:
+        '200':
+          description: Succeed in Login.
+          content:
+            application/json:
+              schema:
+                type: string
+  /todos:
+    get:
+      operationId: fetchAllTodos
+      description: ログインユーザのTODOを全て取得
+      parameters: []
+      responses:
+        '200':
+          description: TODO一覧の取得完了
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchAllTodosDto'
+    post:
+      operationId: createTodo
+      description: ログインユーザのTODOを作成
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTodoDto'
+      responses:
+        '201':
+          description: TODOの作成成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTodoResponseDto'
+
+components:
+  schemas:
+    SignUpDto:
+      description: Create user params.
+      type: object
+      properties:
+        email:
+          type: string
+          example: test@example.com
+        password:
+          type: string
+      required:
+        - email
+        - password
+    SignUpResult:
+      description: Create user result.
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        email:
+          type: string
+          example: test@example.com
+      required:
+        - id
+        - email
+    SignInDto:
+      description: Sign in params.
+      type: object
+      properties:
+        email:
+          type: string
+          example: test@example.com
+        password:
+          type: string
+      required:
+        - email
+        - password
+    FetchAllTodosDto:
+      description: TODO一覧のレスポンスのDTO
+      type: object
+      properties:
+        todos:
+          type: array
+          items:
+            $ref: '#/components/schemas/FetchTodoDto'
+    FetchTodoDto:
+      description: TODOの取得
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+      required:
+        - id
+        - title
+        - content
+    CreateTodoDto:
+      description: TODO作成のrequest DTO
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      required:
+        - title
+        - content
+    CreateTodoResponseDto:
+      description: TODO作成のresponse DTO
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      required:
+        - title
+        - content

@@ -13,10 +13,18 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { TodosService } from './todos.service';
-import { CreateTodoDto, UpdateTodoDto } from './todo.dto';
-import { Todo } from './todo.entity';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { JwtPayload } from 'src/interfaces/jwt-payload.interface';
+import { ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  CreateTodoDto,
+  CreateTodoResponseDto,
+  DeleteTodoResponseDto,
+  FetchAllTodosDto,
+  FetchTodoDto,
+  UpdateTodoDto,
+  UpdateTodoResponseDto,
+} from 'api/todos/@types';
 
 @UseGuards(AuthGuard)
 @Controller('todos')
@@ -24,17 +32,21 @@ export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
   @Get()
-  async index(@Request() req: { user: JwtPayload }): Promise<Todo[]> {
+  @ApiCreatedResponse({ description: 'ログインユーザのTODO一覧取得' })
+  async index(@Request() req: { user: JwtPayload }): Promise<FetchAllTodosDto> {
     return await this.todosService.findAll(req.user.userId);
   }
 
   @Post()
+  @ApiCreatedResponse({ description: 'ログインユーザのTODO作成成功' })
   async create(
     @Request() req: { user: JwtPayload },
     @Body() dto: CreateTodoDto,
-  ): Promise<Todo> {
+  ): Promise<CreateTodoResponseDto> {
     try {
-      return this.todosService.create(dto, req.user.userId);
+      const createdTodo = await this.todosService.create(dto, req.user.userId);
+
+      return { title: createdTodo.title, content: createdTodo.content };
     } catch (error) {
       throw new HttpException(
         'Internal Server Error',
@@ -47,12 +59,15 @@ export class TodosController {
   async show(
     @Request() req: { user: JwtPayload },
     @Param('id') id: string,
-  ): Promise<Todo> {
+  ): Promise<FetchTodoDto> {
     const todo = await this.todosService.read(id, req.user.userId);
     if (!todo) {
-      throw new NotFoundException({ message: '該当するTODOがありません。' });
+      throw new NotFoundException({
+        statusCode: 404,
+        message: '該当するTODOがありません。',
+      });
     }
-    return todo;
+    return { id: todo.id, title: todo.title, content: todo.content };
   }
 
   @Put(':id')
@@ -60,13 +75,18 @@ export class TodosController {
     @Param('id') id: string,
     @Body() dto: UpdateTodoDto,
     @Request() req: { user: JwtPayload },
-  ): Promise<Todo> {
+  ): Promise<UpdateTodoResponseDto> {
     const todo = await this.todosService.read(id, req.user.userId);
     if (!todo) {
-      throw new NotFoundException({ message: '該当するTODOがありません。' });
+      throw new NotFoundException({
+        statusCode: 404,
+        message: '該当するTODOがありません。',
+      });
     }
     try {
-      return await this.todosService.update(todo, dto);
+      const updatedTodo = await this.todosService.update(todo, dto);
+
+      return { title: updatedTodo.title, content: updatedTodo.content };
     } catch (error) {
       throw new HttpException(
         'Internal Server Error',
@@ -79,13 +99,18 @@ export class TodosController {
   async delete(
     @Request() req: { user: JwtPayload },
     @Param('id') id: string,
-  ): Promise<Todo> {
+  ): Promise<DeleteTodoResponseDto> {
     const todo = await this.todosService.read(id, req.user.userId);
     if (!todo) {
-      throw new NotFoundException({ message: '該当するTODOがありません。' });
+      throw new NotFoundException({
+        statusCode: 404,
+        message: '該当するTODOがありません。',
+      });
     }
     try {
-      return await this.todosService.delete(todo);
+      await this.todosService.delete(todo);
+
+      return { message: 'TODOの削除に成功しました。' };
     } catch (error) {
       throw new HttpException(
         'Internal Server Error',

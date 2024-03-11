@@ -12,8 +12,8 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
     auth: {
       sign_in: {
         /**
-         * Login.
-         * @returns Succeed in Login.
+         * ログイン
+         * @returns ログイン成功
          */
         post: (option: {
           body: Methods_1bxrhgq['post']['reqBody'];
@@ -25,8 +25,8 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
             Methods_1bxrhgq['post']['status']
           >(prefix, PATH0, POST, option).text(),
         /**
-         * Login.
-         * @returns Succeed in Login.
+         * ログイン
+         * @returns ログイン成功
          */
         $post: (option: {
           body: Methods_1bxrhgq['post']['reqBody'];
@@ -43,8 +43,8 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
       },
       sign_up: {
         /**
-         * Create user.
-         * @returns Created User.
+         * 会員登録
+         * @returns 会員登録成功
          */
         post: (option: {
           body: Methods_1escmss['post']['reqBody'];
@@ -56,8 +56,8 @@ const api = <T>({ baseURL, fetch }: AspidaClient<T>) => {
             Methods_1escmss['post']['status']
           >(prefix, PATH1, POST, option).json(),
         /**
-         * Create user.
-         * @returns Created User.
+         * 会員登録
+         * @returns 会員登録成功
          */
         $post: (option: {
           body: Methods_1escmss['post']['reqBody'];

@@ -38,6 +38,35 @@ paths:
             application/json:
               schema:
                 type: string
+  /todos:
+    get:
+      operationId: fetchAllTodos
+      description: ログインユーザのTODOを全て取得
+      parameters: []
+      responses:
+        '200':
+          description: TODO一覧の取得完了
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchAllTodosDto'
+    post:
+      operationId: createTodo
+      description: ログインユーザのTODOを作成
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTodoDto'
+      responses:
+        '201':
+          description: TODOの作成成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTodoResponseDto'
 
 components:
   schemas:
@@ -78,3 +107,47 @@ components:
       required:
         - email
         - password
+    FetchAllTodosDto:
+      description: TODO一覧のレスポンスのDTO
+      type: object
+      properties:
+        todos:
+          type: array
+          items:
+            $ref: '#/components/schemas/FetchTodoDto'
+    FetchTodoDto:
+      description: TODOの取得
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        content:
+          type: string
+      required:
+        - id
+        - title
+        - content
+    CreateTodoDto:
+      description: TODO作成のrequest DTO
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      required:
+        - title
+        - content
+    CreateTodoResponseDto:
+      description: TODO作成のresponse DTO
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+      required:
+        - title
+        - content

@@ -2,11 +2,11 @@
 import type * as Types from '../../@types'
 
 export type Methods = {
-  /** Create user. */
+  /** 会員登録 */
   post: {
     status: 200
-    /** Created User. */
-    resBody: Types.SignUpResult
+    /** 会員登録成功 */
+    resBody: Types.SignUpResponseDto
     reqBody: Types.SignUpDto
   }
 }

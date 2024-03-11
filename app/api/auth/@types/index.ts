@@ -1,12 +1,12 @@
 /* eslint-disable */
-/** Create user params. */
+/** 会員登録のリクエストのDTO */
 export type SignUpDto = {
   email: string
   password: string
 }
 
-/** Create user result. */
-export type SignUpResult = {
+/** 会員登録のレスポンス */
+export type SignUpResponseDto = {
   id: string
   email: string
 }

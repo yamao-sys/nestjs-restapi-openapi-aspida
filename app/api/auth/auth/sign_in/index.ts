@@ -2,10 +2,10 @@
 import type * as Types from '../../@types'
 
 export type Methods = {
-  /** Login. */
+  /** ログイン */
   post: {
     status: 200
-    /** Succeed in Login. */
+    /** ログイン成功 */
     resBody: string
     reqBody: Types.SignInDto
   }

@@ -8,10 +8,9 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignInDto } from './signin.dto';
 import { Response } from 'express';
-import { SignUpDto, SignUpResult } from 'api/@types';
 import { ApiCreatedResponse } from '@nestjs/swagger';
+import { SignInDto, SignUpDto, SignUpResponseDto } from 'api/auth/@types';
 
 @Controller('auth')
 export class AuthController {
@@ -25,7 +24,7 @@ export class AuthController {
   @Post('sign_up')
   async signUp(
     @Body(ValidationPipe) signupDto: SignUpDto,
-  ): Promise<SignUpResult> {
+  ): Promise<SignUpResponseDto> {
     return this.authService.signUp(signupDto);
   }
 

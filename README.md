@@ -1,5 +1,5 @@
 # nestjs-restapi-openapi-aspida
-Nest.jsのRESTAPI構築(OpenAPI aspida)
+Nest.jsのREST API構築(OpenAPI aspida)
 
 Nest.jsのアーキテクチャ
 https://zenn.dev/morinokami/articles/nestjs-overview

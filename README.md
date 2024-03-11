@@ -72,3 +72,9 @@ rm -rf api/todos && npx openapi2aspida -i ../swagger/todos/swagger.yml -o api/to
 【参考】
 ・https://github.com/cdimascio/express-openapi-validator/blob/master/examples/9-nestjs/src/app.module.ts
 ・https://qiita.com/mana-vv/items/6d6946085e360883e5ad
+
+
+残タスク
+- USERにもSwagger適用
+- バリデーションチェックで200を返すように
+- GUI or エディタで型定義を確認可能に

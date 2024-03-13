@@ -80,4 +80,8 @@ rm -rf api/todos && npx openapi2aspida -i ../swagger/todos/swagger.yml -o api/to
 	- それ以上に考えたいのが、generatedをそのまま型として使ってしまうと、ValidationPipeの恩恵が受けにくくなってしまう...
 	- できた型をもとにDTO定義する、でそんなに苦労しないかな...？
 		- ロジックがDTOごとに散らばりそうだな
-- GUI or エディタで型定義を確認可能に
+		- → 継承使ってやろう！
+- GUIで型定義を確認可能に
+	- GUIで確認できる必要はなさそう
+		- yamlで管理しているので、そちらで事足りそう
+		- yamlに加えて、Api〜デコレータをエンドポイントを作成するたびに付与するのが煩わしそう

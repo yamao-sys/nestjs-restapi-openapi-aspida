@@ -10,7 +10,10 @@ import {
 import { AuthService } from './auth.service';
 import { Response } from 'express';
 import { ApiCreatedResponse } from '@nestjs/swagger';
-import { SignInDto, SignUpDto, SignUpResponseDto } from 'api/auth/@types';
+import { SignUpDto } from './dto/sign_up.dto';
+import { SignUpResponseDto } from 'api/auth/@types';
+import { SignInDto } from './dto/sign_in.dto';
+// import { SignInDto, SignUpDto, SignUpResponseDto } from 'api/auth/@types';
 
 @Controller('auth')
 export class AuthController {

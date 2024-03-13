@@ -75,6 +75,9 @@ rm -rf api/todos && npx openapi2aspida -i ../swagger/todos/swagger.yml -o api/to
 
 
 残タスク
-- USERにもSwagger適用
 - バリデーションチェックで200を返すように
+	- 別に400でも良い
+	- それ以上に考えたいのが、generatedをそのまま型として使ってしまうと、ValidationPipeの恩恵が受けにくくなってしまう...
+	- できた型をもとにDTO定義する、でそんなに苦労しないかな...？
+		- ロジックがDTOごとに散らばりそうだな
 - GUI or エディタで型定義を確認可能に

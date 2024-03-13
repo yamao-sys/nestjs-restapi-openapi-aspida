@@ -15,6 +15,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FetchAllTodosDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: TODO取得時のレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
         '401':
           description: 認証エラー
           content:
@@ -47,6 +68,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateTodoResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: TODO取得時のレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
         '401':
           description: 認証エラー
           content:
@@ -79,6 +121,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/FetchTodoDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: TODO取得時のレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
         '401':
           description: 認証エラー
           content:
@@ -131,6 +194,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UpdateTodoResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: TODO取得時のレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
         '401':
           description: 認証エラー
           content:
@@ -177,6 +261,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteTodoResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: TODO取得時のレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
         '401':
           description: 認証エラー
           content:

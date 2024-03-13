@@ -1,4 +1,10 @@
 responses:
+  '400':
+    description: バリデーションエラー
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/ValidationError'
   '401':
     description: 認証エラー
     content:
@@ -14,6 +20,23 @@ responses:
 
 components:
   schemas:
+    ValidationError:
+      description: バリデーションエラー
+      type: object
+      properties:
+        statusCode:
+          type: number
+        message:
+          type: array
+          items:
+            description: TODO取得時のレスポンスのDTO
+            type: string
+        error:
+          type: string
+      required:
+        - statusCode
+        - message
+        - error
     Unauthorized:
       description: 認証エラー
       type: object

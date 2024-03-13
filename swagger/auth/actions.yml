@@ -21,6 +21,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SignUpResponseDto'
+        '400':
+          $ref: '../errors.yml#responses/400'
   /auth/sign_in:
     post:
       operationId: signIn
@@ -38,7 +40,8 @@ paths:
             application/json:
               schema:
                 type: string
-
+        '400':
+          $ref: '../errors.yml#responses/400'
 components:
   schemas:
     SignUpDto:

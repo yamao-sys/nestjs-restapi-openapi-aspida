@@ -17,14 +17,14 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { JwtPayload } from 'src/interfaces/jwt-payload.interface';
 import { ApiCreatedResponse } from '@nestjs/swagger';
 import {
-  CreateTodoDto,
   CreateTodoResponseDto,
   DeleteTodoResponseDto,
   FetchAllTodosDto,
   FetchTodoDto,
-  UpdateTodoDto,
   UpdateTodoResponseDto,
 } from 'api/todos/@types';
+import { CreateTodoDto } from './dto/create_todo.dto';
+import { UpdateTodoDto } from './dto/update_todo.dto';
 
 @UseGuards(AuthGuard)
 @Controller('todos')

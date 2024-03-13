@@ -20,6 +20,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SignUpResponseDto'
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: TODO取得時のレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
   /auth/sign_in:
     post:
       operationId: signIn
@@ -37,6 +58,27 @@ paths:
             application/json:
               schema:
                 type: string
+        '400':
+          description: バリデーションエラー
+          content:
+            application/json:
+              schema:
+                description: バリデーションエラー
+                type: object
+                properties:
+                  statusCode:
+                    type: number
+                  message:
+                    type: array
+                    items:
+                      description: TODO取得時のレスポンスのDTO
+                      type: string
+                  error:
+                    type: string
+                required:
+                  - statusCode
+                  - message
+                  - error
 components:
   schemas:
     SignUpDto:

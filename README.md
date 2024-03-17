@@ -35,6 +35,7 @@ npx ts-node ./node_modules/.bin/typeorm migration:run -d ./data-source.ts
 		- https://zenn.dev/dyoshikawa/articles/ed61d6bf0e8ef1
 		- https://github.com/aspida/openapi2aspida
 		- https://github.com/aspida/aspida/tree/main/packages/aspida-fetch#readme
+  		- https://zenn.dev/seya/articles/070a375a5de62c 
 		- モックサーバとしてmswがある
 			- https://github.com/mswjs/msw
 			- Aspidaで自動生成したレスポンスの型と組み合わせることで型安全なモックサーバを立てる
